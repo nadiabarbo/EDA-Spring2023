@@ -39,15 +39,15 @@ Enter answers to the questions just below the >Answer: prompt.
 
 1. What are your previous experiences with data analytics, R, and Git? Include both formal and informal training.
 
-> Answer: 
+> Answer: I used R in undergrad to do statistical analysis for my lab work (I was in a herpetology lab). I am also using R in my current lab to do data analyes on zebrafish behavior (for my MP). I took ENVIRON 710, so I have experience using R in that context. The data analysis using R that I have previously mentioned are my only experiences with data analytics. I don't have previous experience using Git but I have used GitHub Desktop is John's GIS Data Analytics class.
 
 2. Are there any components of the course about which you feel confident?
 
-> Answer: 
+> Answer: I feel confident with R basics - such as coding dos and don'ts, basic commands, and how the interface is set up. I know how to make scatterplots, box plots, and bar graphs and how to customize them to be visually appealing. I am also comfortable with some pretty general statistical analyses (like finding summary statistics from a clean dataset).
 
 3. Are there any components of the course about which you feel apprehensive?
 
-> Answer: 
+> Answer: I feel apprehensive about cleaning data. I have tried to clean excel data many times and it never goes as planned. I'm also really excited to learn how to do this properly, however, because I know it will save me a lot of time. I'm also a little nervous about the final project because when it comes to data analytics, I have a hard time knowing where to start. But that is why I'm taking this course and hopefully I will feel more confident by the time I start the final project!
 
 
 ## 3) GitHub
