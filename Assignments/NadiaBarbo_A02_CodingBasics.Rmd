@@ -32,10 +32,14 @@ This exercise accompanies the lessons in Environmental Data Analytics on coding 
 
 ```{r}
 #1. 
+seq100 <- seq(1,100,4) #creating sequence of numbers from 1 to 100, with each number increasing by factor of 4 using the seq function
 
 #2. 
+mean(seq100) #finding the mean of seq100
+median(seq100) #finding the median of seq100
 
 #3. 
+mean(seq100) > median(seq100) #determining if the mean of seq100 is greater than the median of seq100 (TRUE or FALSE)
 
 ```
 
