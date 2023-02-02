@@ -40,7 +40,6 @@ median(seq100) #finding the median of seq100
 
 #3. 
 mean(seq100) > median(seq100) #determining if the mean of seq100 is greater than the median of seq100 (TRUE or FALSE)
-
 ```
 
 ## Basics Day 2
@@ -54,21 +53,45 @@ mean(seq100) > median(seq100) #determining if the mean of seq100 is greater than
 8.  Label the columns of your data frame with informative titles.
 
 ```{r}
+#5.
+studentnames <- c("Nadia", "Karina", "Abby", "Emma") #creating vector of names of students
+testscores <- c(12, 87, 53, 100) #creating vector of test scores
+passedtest <- c(FALSE, TRUE, TRUE, TRUE) # creating vector of whether or not the student passed the test
 
+#6.
+typeof(studentnames) #studentnames is a character (chr) vector
+typeof(testscores) #testscores is a double/numeric (num) vector
+typeof(passedtest)#passed test is a logical (logi) vector
+
+#7. and 8.
+testresults.df <- data.frame("Student.Names" = studentnames, "Test.Scores" = testscores, "Passed.Test" = passedtest) #combining previously created vectors into a data frame and naming the columns of the data frame
 ```
 
 9.  QUESTION: How is this data frame different from a matrix?
 
-> Answer:
+> Answer: A data frame is different from a matrix because a data frame can be composed of columns/vectors that are different modes from one another (but they all need to be the same length), while in a matrix, all of the columns need to be the same mode and same length.
 
 10. Create a function with an if/else statement. Your function should take a **vector** of test scores and print (not return) whether a given test score is a passing grade of 50 or above (TRUE or FALSE). You will need to choose either the `if` and `else` statements or the `ifelse` statement. 
+
+> passed <- function(grade.vector){
+    result <- ifelse(grade.vector>=50, TRUE, FALSE)
+    print(result)
+}
 
 11. Apply your function to the vector with test scores that you created in number 5.
 
 ```{r}
+#11.
+passed <- function(grade.vector){
+    result <- ifelse(grade.vector>=50, TRUE, FALSE)
+    print(result)
+}
 
+passed(testscores)
 ```
+
 
 12. QUESTION: Which option of `if` and `else` vs. `ifelse` worked? Why?
 
-> Answer:
+> Answer: The "ifelse" option worked because it is able to check multiple values from a vector at one time, allowing us to input a vector and print the outputs for each value in that vector. The "if" statement can only check one element in a vector at a time, so it cannot evaluate the entire vector.
+
