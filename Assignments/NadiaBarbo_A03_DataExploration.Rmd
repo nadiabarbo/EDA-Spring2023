@@ -139,9 +139,7 @@ unique(Litter$collectDate) #determining which dates litter was collected in Augu
 13. Using the `unique` function, determine how many plots were sampled at Niwot Ridge. How is the information obtained from `unique` different from that obtained from `summary`?
 
 ```{r determining number of unique plots sampled}
-unq_plots <- unique(Litter$plotID) #the output of the unique function on different plots sampled at Niwot Ridge
-unq_plots #viewing the output of the unique function on different plots sampled at Niwot Ridge
-length(unq_plots) #finding how many unique plots were sampled at Niwot Ridge (there are 12)
+unique(Litter$plotID) #finding how many unique plots were sampled at Niwot Ridge (there are 12)
 ```
 
 > Answer: The unique function will output each unique value within the designated column/data one time and tell you how many unique values there are. The summary function will output each value within the designated column/data and along with the value it will tell you how many times that value occured within the desigdated data.
