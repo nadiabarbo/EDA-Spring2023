@@ -144,8 +144,7 @@ unq_plots #viewing the output of the unique function on different plots sampled 
 length(unq_plots) #finding how many unique plots were sampled at Niwot Ridge (there are 12)
 ```
 
-> Answer: The unique function will output each unique value within the designated column/data one time and provide no other information about that value. The summary function will output each value within the designated column/data and along with the value it will tell you how many times that value occured within the desigdated data.
-NOTE: Here, I used the length function to pull the number of unique values from the dataset after using the unique function because when I ran this code in my colsole it did not tell me how many levels there were. However, when I knitted the RMD to a PDF the output then tells me how many levels there are. I think it's supposed to tell me in the console (in which case I wouldn't need to use the length function) but for some reason mine doesn't.
+> Answer: The unique function will output each unique value within the designated column/data one time and tell you how many unique values there are. The summary function will output each value within the designated column/data and along with the value it will tell you how many times that value occured within the desigdated data.
 
 14. Create a bar graph of functionalGroup counts. This shows you what type of litter is collected at the Niwot Ridge sites. Notice that litter types are fairly equally distributed across the Niwot Ridge sites.
 
