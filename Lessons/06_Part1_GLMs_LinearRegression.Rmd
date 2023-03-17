@@ -6,6 +6,9 @@ output: pdf_document
 geometry: margin=2.54cm
 editor_options: 
   chunk_output_type: console
+header-includes:
+  \usepackage{fvextra}
+  \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
 ---
 
 ## Objectives
