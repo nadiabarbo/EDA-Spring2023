@@ -28,7 +28,7 @@ library(Kendall)
 #install.packages("tseries")
 library(tseries)
 library(here)
-here
+here()
 
 # Set theme
 mytheme <- theme_classic(base_size = 14) +
@@ -44,7 +44,7 @@ Today we will work with data from the Climate Change Knowledge Portal from the W
 Research question: Can you see any changes on the rainfall regime or average temperature over time?
 
 ```{r}
-#Exercise 1: Import both datasets using the read.csv function.
+#Exercise 1: Import both datasets using the read.csv function
 Rainfall_BR <- read.csv(here("Data/Raw/pr_1901_2016_BRA.csv"), stringsAsFactors = TRUE)
 
 Temp_BR <- read.csv(here("Data/Raw/tas_1901_2016_BRA.csv"), stringsAsFactors = TRUE)
@@ -84,15 +84,24 @@ BR_complete <- inner_join(Rainfall_BR_processed,Temp_BR_processed)
 
 #Exercise 5: Check if there is any missing data for both temperature and rainfall series.
 
-
-
+summary(BR_complete$Rainfall)
+summary(BR_complete$Temperature_C)
+#no
+#simpler way here since we combined the data using inner join
 
 #Exercise 6: Plot both series over time on separate plots. Add a trend line using geom_smooth(). Can you say something about the trend just by visualizing the data?
 
+ggplot(BR_complete, aes(y = Rainfall, x = Date)) +
+  geom_line() +
+  geom_smooth(method='lm')
+#there is seasonality here (see up and down movements)
+#no upward trend
 
-
-
-
+ggplot(BR_complete, aes(y = Temperature_C, x = Date)) +
+  geom_line() +
+  geom_smooth(method='lm')
+#there is seasonality
+#trend in increase average temperature
 
 ```
 
@@ -101,7 +110,21 @@ BR_complete <- inner_join(Rainfall_BR_processed,Temp_BR_processed)
 ```{r}
 #Exercise 7: Create a time series objects for each series using ts(). Make sure you specify the starting point and frequency.
 
+#my try
+BR_complete.rainfall.ts <- ts(BR_complete$Rainfall, start = c(1901,01,01), frequency = 12)
+BR_complete.temperature.ts <- ts(BR_complete$Temperature_C, start = c(1901,01,01), frequency = 12)
 
+
+#in class
+BR_rain_ts <- ts(BR_complete$Rainfall, start = c(1901,1), frequency = 12)
+BR_temp_ts <- ts(BR_complete$Temperature_C, start = c(1901,1), frequency = 12)
+
+#more general
+f_year <- year(first(BR_complete$Date))
+f_month <- month(first(BR_complete$Date))
+
+BR_rain_ts <- ts(BR_complete$Rainfall, start = c(f_year,f_month), frequency = 12)
+BR_temp_ts <- ts(BR_complete$Temperature_C, start = c(f_year,f_month), frequency = 12)
 
 ```
 
@@ -123,25 +146,52 @@ The `stl` function decomposes the time series object into its component parts. W
 # Exercise 8: Use the stl() function to decompose both series. 
 # Visualize the decomposed series using plot(). What components can you identify?
 
+#my try
+BR_complete.rainfall.decomposed <- stl(BR_complete.rainfall.ts, s.window = 'periodic')
+plot(BR_complete.rainfall.decomposed)
 
+BR_complete.temperature.decomposed <- stl(BR_complete.temperature.ts, s.window = 'periodic')
+plot(BR_complete.temperature.decomposed)
 
+#in class
+BR_Rain_decomp <- stl(BR_rain_ts, s.window="periodic")
+plot(BR_Rain_decomp) #seasonlaity important in trend
+#larger the bar, the smaller the impact on my series (had to zoom in to get the variation from the little bar) - if bars are the asme size, they have the same importance
 
+BR_Temp_decomp <- stl(BR_temp_ts, s.window="periodic")
+plot(BR_Temp_decomp)
 
 
 # Exercise 9: Use the times series object generated with the stl() to extract the 
 # components of each series and turn them into data frames.
 
+#my try
+BR_complete.rainfall.components <- as.data.frame(BR_complete.rainfall.decomposed$time.series[,1:3])
+BR_complete.rainfall.components <- mutate(BR_complete.rainfall.components, 
+        Date = BR_complete$Date)
 
+BR_complete.temperature.components <- as.data.frame(BR_complete.temperature.decomposed$time.series[,1:3])
+BR_complete.temperature.components <- mutate(BR_complete.temperature.components, 
+        Date = BR_complete$Date)
 
+#in class
+BR_Rain_Components <- as.data.frame(BR_Rain_decomp$time.series[,1:3])
+BR_Rain_Components <- mutate(BR_Rain_Components, Observed = BR_complete$Rainfall, Date=BR_complete$Date)
 
-
+BR_Temp_Components <- as.data.frame(BR_Temp_decomp$time.series[,1:3])
+BR_Temp_Components <- mutate(BR_Temp_Components, Observed = BR_complete$Temperature_C, Date=BR_complete$Date)
 
 # Exercise 10: Visualize how the trend maps onto the data for both series
 
+ggplot(BR_Temp_Components, aes(x=Date))+
+  geom_line(aes(y=Observed))+
+  geom_line(aes(y=trend),col="red")+
+  ylab("Temperature")
 
-
-
-
+ggplot(BR_Rain_Components, aes(x=Date))+
+  geom_line(aes(y=Observed))+
+  geom_line(aes(y=trend),col="red")+
+  ylab("Rainfall")
 
 ```
 
